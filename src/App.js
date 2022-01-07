@@ -1,24 +1,41 @@
-import logo from './logo.svg';
+import React,{useState, useEffect} from 'react';
+import Header from './components/Header';
+import Books from './components/Books';
+import api from "./api/base-url.js";
 import './App.css';
 
 function App() {
+  const [books, setBooks] = useState([]);
+  useEffect (()=>{
+    handleSearchFromSessionStorage();
+  },[]);
+  const handleSearchFromSessionStorage = async () => {
+      try{
+        const response = await api.get(`/search-books/${sessionStorage.getItem('search-key')}`);
+        setBooks(response.data);
+      }
+      catch(err){
+        console.log(err.response.data);
+      }
+  }
+  const handleSearchClick = async (event) => {
+    try{
+      if(event.target.value !== ""){
+        const response = await api.get(`/search-books/${event.target.value}`);
+        setBooks(response.data);
+        sessionStorage.setItem('search-key', event.target.value);
+      }
+    }
+    catch(err){
+      console.log(err.response.data);
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header handleSearchClick={handleSearchClick}/>
+      <Books books={books}/>
     </div>
+
   );
 }
 

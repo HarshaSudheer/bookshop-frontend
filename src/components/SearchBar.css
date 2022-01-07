@@ -1,0 +1,48 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+.search-bar-container{
+    width: 80%;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-field{
+    width: 50%;
+    height: 40px;
+    font-size: large;
+    text-indent: 10px;
+    border: unset;
+}
+
+.cross-button{
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    color: black;
+    padding: 2px;
+    margin-left: -16px;
+    border: unset;
+}
+
+.cross-button:hover{
+    background-color: #FCDE67;
+    border: 1px solid black;
+}
+
+.search-button{
+    width: 60px;
+    height: 40px;
+    background-color: white;
+    padding: 4px;
+    border: unset;
+}
+
+.search-button:hover{
+    background-color: #FCDE67;
+    border: 1px solid black;
+}
